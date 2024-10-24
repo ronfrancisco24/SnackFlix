@@ -31,6 +31,62 @@ class RedOvalButton extends StatelessWidget {
   }
 }
 
+// red square button
+
+class RedSquareButton extends StatelessWidget {
+  final String? text;
+  final void Function()? onPressed;
+
+  const RedSquareButton({this.text, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        child: Center(
+          child: Text(
+            text!,
+            style: kBlackPoppins,
+          ),
+        ),
+        height: 100,
+        width: 130,
+        decoration: BoxDecoration(
+            color: kLightRed, borderRadius: BorderRadius.circular(30)),
+      ),
+    );
+  }
+}
+
+// black square button
+
+class BlackSquareButton extends StatelessWidget {
+  final String? text;
+  final void Function()? onPressed;
+
+  const BlackSquareButton({this.text, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        child: Center(
+          child: Text(
+            text!,
+            style: kWhitePoppins,
+          ),
+        ),
+        height: 100,
+        width: 130,
+        decoration: BoxDecoration(
+            color: kBlue, borderRadius: BorderRadius.circular(30)),
+      ),
+    );
+  }
+}
+
 // black oval button
 
 class BlackOvalButton extends StatelessWidget {
@@ -58,3 +114,5 @@ class BlackOvalButton extends StatelessWidget {
     );
   }
 }
+
+
