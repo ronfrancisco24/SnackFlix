@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // colors
 
 const kBlack = Color(0xFF0E131F);
+const kGray = Color(0xFF91959C);
 const kDarkGray = Color(0xFF181E2E);
 const kMediumGray = Color(0xFF2A303F);
 const kBlueGray = Color(0xFF38405F);
@@ -21,9 +22,21 @@ const kLinearGradient = BoxDecoration(
 const kLeagueSpartan =
     TextStyle(fontFamily: 'LeagueSpartan', fontSize: 20, color: Colors.white);
 
-const kPoppins = TextStyle(
+const kWhitePoppins = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 28,
     color: Colors.white,
+    fontWeight: FontWeight.bold);
+
+const kBlackPoppins = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 28,
+    color: kBlack,
+    fontWeight: FontWeight.bold);
+
+const kGrayPoppins = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 28,
+    color: kGray,
     fontWeight: FontWeight.bold);
 
