@@ -7,7 +7,7 @@ const kGray = Color(0xFF91959C);
 const kDarkGray = Color(0xFF181E2E);
 const kMediumGray = Color(0xFF2A303F);
 const kBlueGray = Color(0xFF38405F);
-const kLightRed = Color(0xFFF9232C);
+const kLightRed = Color(0xFFf9232c);
 
 // gradient
 

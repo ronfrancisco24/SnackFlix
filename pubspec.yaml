@@ -26,6 +26,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - images/
+
   fonts:
     - family: LeagueSpartan
       fonts:
@@ -33,4 +36,7 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
+    - family: PoppinsBold
+      fonts:
+        - asset: assets/fonts/Poppins-Bold.ttf
 

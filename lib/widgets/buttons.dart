@@ -23,9 +23,9 @@ class RedOvalButton extends StatelessWidget {
           ),
         ),
         height: 70,
-        width: 200,
+        width: 250,
         decoration: BoxDecoration(
-            color: kLightRed, borderRadius: BorderRadius.circular(10)),
+            color: kLightRed, borderRadius: BorderRadius.circular(30)),
       ),
     );
   }
