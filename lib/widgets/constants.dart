@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 // colors
 
 const kBlack = Color(0xFF0E131F);
@@ -9,10 +8,22 @@ const kMediumGray = Color(0xFF2A303F);
 const kBlueGray = Color(0xFF38405F);
 const kLightRed = Color(0xFFF9232C);
 
+// gradient
+
 const kLinearGradient = BoxDecoration(
-  gradient: LinearGradient(
-    begin: Alignment.topLeft,
-    end: Alignment.bottomRight,
-      colors:[Color(0xFF0e131F), Color(0xFF38405F)]
-  )
-);
+    gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Color(0xFF0e131F), Color(0xFF38405F)]));
+
+// fonts
+
+const kLeagueSpartan =
+    TextStyle(fontFamily: 'LeagueSpartan', fontSize: 20, color: Colors.white);
+
+const kPoppins = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 28,
+    color: Colors.white,
+    fontWeight: FontWeight.bold);
+

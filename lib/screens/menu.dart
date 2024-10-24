@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vending_machine/widgets/constants.dart';
+import 'package:vending_machine/widgets/buttons.dart';
+import 'transaction.dart';
 
 void main() => runApp(const MenuPage());
 
@@ -25,9 +27,20 @@ class _MenuPageState extends State<MenuPage> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 10,
+                      height: 80,
                     ),
-                    Text('Hey Want a snack?', style: TextStyle(color: Colors.white),)
+                    Text('Hey\nWant a snack?', style: kPoppins),
+                    RedOvalButton(
+                      text: 'Transaction',
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TransactionPage(),
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -47,3 +60,5 @@ class _MenuPageState extends State<MenuPage> {
     );
   }
 }
+
+//TODO: create a list that holds different snacks.
