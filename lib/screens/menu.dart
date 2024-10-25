@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vending_machine/widgets/constants.dart';
 import 'package:vending_machine/widgets/buttons.dart';
+import 'package:vending_machine/widgets/options.dart';
 import 'package:vending_machine/widgets/snack_option.dart';
+import 'keypad.dart';
 import 'transaction.dart';
+
 
 void main() => runApp(const MyApp());
 
@@ -13,13 +16,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MenuPage(),
+      home: MenuPage(),
     );
   }
 }
 
 class MenuPage extends StatefulWidget {
-  const MenuPage({super.key});
+
+  MenuPage({super.key});
 
   @override
   State<MenuPage> createState() => _MenuPageState();
@@ -28,29 +32,10 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
   List<SnackOption> selectedSnacks = [];
 
-  final List<SnackOption> snackOptions = [
-    SnackOption(
-      productName: 'Lunchly',
-      price: 21.00,
-      imagePath: 'images/snack_pic.png',
-      label: 'A1',
-    ),
-    SnackOption(
-      productName: 'Coke',
-      price: 21.00,
-      imagePath: 'images/snack_pic.png',
-      label: 'A1',
-    ),
-    SnackOption(
-      productName: 'Gatorade',
-      price: 21.00,
-      imagePath: 'images/snack_pic.png',
-      label: 'A1',
-    ),
-  ];
+
 
   // adds snacks to cart
-  void addToCare(SnackOption snack) {
+  void addToOrder(SnackOption snack) {
     setState(() {
       selectedSnacks.add(snack);
     });
@@ -91,9 +76,9 @@ class _MenuPageState extends State<MenuPage> {
                           childAspectRatio: 1,
                           crossAxisSpacing: 25,
                           mainAxisSpacing: 25),
-                      itemCount: snackOptions.length,
+                      itemCount: Options().snackOptions.length,
                       itemBuilder: (context, index) {
-                        final snack = snackOptions[index];
+                        final snack = Options().snackOptions[index];
                         return SnackOption(
                           productName: snack.productName,
                           label: snack.label,
@@ -161,10 +146,10 @@ class _MenuPageState extends State<MenuPage> {
                       padding: EdgeInsets.all(15),
                       shrinkWrap: true,
                       itemCount:
-                          snackOptions.length, // should be selected snacks
+                          Options().snackOptions.length, // should be selected snacks
                       itemBuilder: (context, index) {
                         final snack =
-                            snackOptions[index]; // should be selected snacks
+                            Options().snackOptions[index]; // should be selected snacks
                         return Padding(
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: SnackOption(
@@ -184,7 +169,7 @@ class _MenuPageState extends State<MenuPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const TransactionPage(),
+                            builder: (context) => const KeypadPage(),
                           ),
                         );
                       },
