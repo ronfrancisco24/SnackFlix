@@ -3,7 +3,7 @@ import 'constants.dart';
 
 //TODO: create other buttons,
 
-// red oval button
+// Oval Buttons
 
 class RedOvalButton extends StatelessWidget {
   final String? text;
@@ -31,7 +31,33 @@ class RedOvalButton extends StatelessWidget {
   }
 }
 
-// red square button
+class BlackOvalButton extends StatelessWidget {
+  final String? text;
+  final void Function()? onPressed;
+
+  const BlackOvalButton({this.text, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        child: Center(
+          child: Text(
+            text!,
+            style: kGrayPoppins,
+          ),
+        ),
+        height: 70,
+        width: 200,
+        decoration: BoxDecoration(
+            color: kLightRed, borderRadius: BorderRadius.circular(10)),
+      ),
+    );
+  }
+}
+
+// Square Buttons
 
 class RedSquareButton extends StatelessWidget {
   final String? text;
@@ -59,13 +85,11 @@ class RedSquareButton extends StatelessWidget {
   }
 }
 
-// black square button
-
-class BlackSquareButton extends StatelessWidget {
+class BlueSquareButton extends StatelessWidget {
   final String? text;
   final void Function()? onPressed;
 
-  const BlackSquareButton({this.text, this.onPressed});
+  const BlueSquareButton({this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -87,13 +111,12 @@ class BlackSquareButton extends StatelessWidget {
   }
 }
 
-// black oval button
-
-class BlackOvalButton extends StatelessWidget {
+class GraySquareButton extends StatelessWidget {
   final String? text;
+  final IconData? icon; // New IconData parameter
   final void Function()? onPressed;
 
-  const BlackOvalButton({this.text, this.onPressed});
+  const GraySquareButton({this.text, this.icon, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -101,15 +124,19 @@ class BlackOvalButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         child: Center(
-          child: Text(
+          child: icon != null // If an icon is provided, show the icon, otherwise show text
+              ? Icon(icon, color: Colors.white, size: 30)  // Customize the icon color and size
+              : Text(
             text!,
-            style: kGrayPoppins,
+            style: kWhitePoppins,
           ),
         ),
-        height: 70,
-        width: 200,
+        height: 100,
+        width: 130,
         decoration: BoxDecoration(
-            color: kLightRed, borderRadius: BorderRadius.circular(10)),
+          color: kGray,
+          borderRadius: BorderRadius.circular(30),
+        ),
       ),
     );
   }

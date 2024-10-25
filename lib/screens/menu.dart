@@ -163,13 +163,13 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                   Expanded(
-                    child: BlackSquareButton(
+                    child: BlueSquareButton(
                       text: 'Keypad',
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const KeypadPage(),
+                            builder: (context) => KeypadPage(),
                           ),
                         );
                       },
