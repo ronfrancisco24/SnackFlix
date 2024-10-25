@@ -10,7 +10,11 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-  double balance = 0; //TODO: has to be globalized.
+  double balance = 0;
+  
+  //TODO: has to be globalized. use a provider.
+  //TODO: have the balance have a limit of 100 (check transaction page)
+  //TODO: have a reset button for the balance.
 
   void addToBalance(double amount){
     setState(() {
