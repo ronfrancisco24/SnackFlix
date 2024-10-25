@@ -10,7 +10,7 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-  double balance = 0;
+  double balance = 0; //TODO: has to be globalized.
 
   void addToBalance(double amount){
     setState(() {

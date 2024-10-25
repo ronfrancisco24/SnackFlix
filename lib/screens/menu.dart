@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // provider
 import 'package:vending_machine/widgets/constants.dart';
 import 'package:vending_machine/widgets/buttons.dart';
 import 'package:vending_machine/widgets/options.dart';
+import 'package:vending_machine/widgets/snack_provider.dart';
 import 'package:vending_machine/widgets/snack_option.dart';
 import 'keypad.dart';
 import 'transaction.dart';
-
-
-void main() => runApp(const MyApp());
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MenuPage(),
-    );
-  }
-}
 
 class MenuPage extends StatefulWidget {
 
@@ -30,19 +17,14 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  List<SnackOption> selectedSnacks = [];
 
-
-
-  // adds snacks to cart
-  void addToOrder(SnackOption snack) {
-    setState(() {
-      selectedSnacks.add(snack);
-    });
-  }
+  //TODO: have to incorporate DFA for transactions
+  //TODO: have to incorporate RegEx for order inputs.
+  //TODO: right now is to incorporate the selectedSnacks and Total price into keypad page, so that addToOrder will be callable.
 
   @override
   Widget build(BuildContext context) {
+    final snackProvider = Provider.of<SnackProvider>(context);
     return Scaffold(
       body: Row(
         children: [
@@ -88,7 +70,7 @@ class _MenuPageState extends State<MenuPage> {
                       },
                     ),
                   ),
-                  Text('Current Transaction P: 0.00',
+                  Text('Balance P: 0.00',
                       style: kWhitePoppins.copyWith(fontSize: 15)),
                   SizedBox(height: 10),
                   Expanded(
@@ -146,10 +128,10 @@ class _MenuPageState extends State<MenuPage> {
                       padding: EdgeInsets.all(15),
                       shrinkWrap: true,
                       itemCount:
-                          Options().snackOptions.length, // should be selected snacks
+                          snackProvider.selectedSnacks.length, // should be selected snacks
                       itemBuilder: (context, index) {
                         final snack =
-                            Options().snackOptions[index]; // should be selected snacks
+                            snackProvider.selectedSnacks[index]; // should be selected snacks
                         return Padding(
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: SnackOption(
@@ -169,9 +151,18 @@ class _MenuPageState extends State<MenuPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => KeypadPage(),
+                            builder: (context) => KeypadPage(addToOrder: snackProvider.addToOrder), //makes addToOrder callable.
                           ),
                         );
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 10,),
+                  Expanded(
+                    child: BlueSquareButton(
+                      text: 'Reset',
+                      onPressed: () {
+                        snackProvider.resetOrder();
                       },
                     ),
                   ),
@@ -186,7 +177,7 @@ class _MenuPageState extends State<MenuPage> {
                   RichText(
                     text: TextSpan(
                       children: [TextSpan(text: 'Total:\n', style: kGrayPoppins.copyWith(fontSize: 15)),
-                        TextSpan(text: 'P: 21.00', style: kGrayPoppins.copyWith(fontSize: 15)), ],
+                        TextSpan(text: 'P: ${snackProvider.totalPrice.toStringAsFixed(2)}', style: kGrayPoppins.copyWith(fontSize: 15)), ],
                     ),
                   ),
                   SizedBox(height: 10,),

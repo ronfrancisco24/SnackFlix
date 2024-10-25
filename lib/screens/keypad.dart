@@ -6,35 +6,51 @@ import 'package:vending_machine/widgets/snack_option.dart';
 import 'menu.dart';
 
 class KeypadPage extends StatefulWidget {
-  KeypadPage({super.key});
+
+  final Function(SnackOption) addToOrder;
+
+  KeypadPage({Key? key, required this.addToOrder}) : super(key:key);
 
   @override
   State<KeypadPage> createState() => _KeypadPageState();
 }
 
 class _KeypadPageState extends State<KeypadPage> {
-  List<String> selections = [];
+  final Options options = Options();
 
-  void _addSelection(String value){
-    if (selections.length < 2){
+  List<String> selections = []; //TODO: has to be globalized.
+
+  String get userSelection => selections
+      .join(''); // a getter to retrieve user selection as a single string.
+
+  void _addSelection(String value) {
+    //TODO: has to check if the user inputted one character and one number only.
+
+    final RegExp regExp = RegExp(r'[A-C][1-6]$');
+
+    if (selections.length < 2) {
       selections.add(value);
-      setState(() {
-
-      });
+      setState(() {});
     } else {
       print('limit has been reached.');
     }
   }
 
-  void _deleteSelection(){
-    if (selections.isNotEmpty){
+  void _deleteSelection() {
+    if (selections.isNotEmpty) {
       selections.removeLast();
-      setState(() {
-
-      });
+      setState(() {});
     }
   }
 
+  SnackOption getSelectedOption() {
+    return options.snackOptions.firstWhere(
+          (option) => option.label == userSelection,
+      orElse: () {
+        throw Exception('No matching snack found for selection: $userSelection');
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +64,16 @@ class _KeypadPageState extends State<KeypadPage> {
                 children: [
                   Column(
                     children: [
-                      SizedBox(height: 150,),
+                      SizedBox(
+                        height: 150,
+                      ),
                       Expanded(
-                        child: Row( //TODO: display order
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             if (selections.isNotEmpty)
                               Text(
-                                'Order: ${selections.join('')}',
+                                'Order: ${userSelection}',
                                 style: kWhitePoppins.copyWith(fontSize: 20),
                               )
                             else
@@ -135,18 +153,25 @@ class _KeypadPageState extends State<KeypadPage> {
                             },
                           ),
                           GraySquareButton(
-                            text: '0',
+                            icon: Icons.home,
                             onPressed: () {
-                              _addSelection('0');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MenuPage()));
                             },
                           ),
                           GraySquareButton(
                             icon: Icons.input,
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => MenuPage())
-                              );
+                              final SnackOption? selectedOption = getSelectedOption();
+                              //TODO: if input matches an item, add to selectedSnack list
+                              if (selectedOption != null){
+                                widget.addToOrder(selectedOption); // Use widget.addToOrder to call the function
+                                print('Snack added: ${selectedOption.productName}');
+                              } else {
+                                print('No matching snack found for selection.');
+                              }
                             },
                           ),
                         ],
