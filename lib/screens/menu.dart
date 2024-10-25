@@ -145,28 +145,32 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                   Expanded(
-                    child: BlueSquareButton(
-                      text: 'Keypad',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => KeypadPage(addToOrder: snackProvider.addToOrder), //makes addToOrder callable.
-                          ),
-                        );
-                      },
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      child: BlueSquareButton(
+                        text: 'Keypad',
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => KeypadPage(addToOrder: snackProvider.addToOrder), //makes addToOrder callable.
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
-                  SizedBox(height: 10,),
                   Expanded(
-                    child: BlueSquareButton(
-                      text: 'Reset',
-                      onPressed: () {
-                        snackProvider.resetOrder();
-                      },
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      child: BlueSquareButton(
+                        text: 'Reset',
+                        onPressed: () {
+                          snackProvider.resetOrder();
+                        },
+                      ),
                     ),
                   ),
-                  SizedBox(height: 10,),
                   SizedBox(
                     width: 130,
                     child: Divider(
@@ -180,18 +184,20 @@ class _MenuPageState extends State<MenuPage> {
                         TextSpan(text: 'P: ${snackProvider.totalPrice.toStringAsFixed(2)}', style: kGrayPoppins.copyWith(fontSize: 15)), ],
                     ),
                   ),
-                  SizedBox(height: 10,),
                   Expanded(
-                    child: RedSquareButton(
-                      text: 'Done',
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TransactionPage(),
-                          ),
-                        );
-                      },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                      child: RedSquareButton(
+                        text: 'Done',
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const TransactionPage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                   SizedBox(
