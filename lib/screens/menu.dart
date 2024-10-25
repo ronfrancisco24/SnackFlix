@@ -19,8 +19,7 @@ class MenuPage extends StatefulWidget {
 class _MenuPageState extends State<MenuPage> {
 
   //TODO: have to incorporate DFA for transactions
-  //TODO: have to incorporate RegEx for order inputs.
-  //TODO: right now is to incorporate the selectedSnacks and Total price into keypad page, so that addToOrder will be callable.
+  //TODO: use provider package (already incorporated) for the balance/transaction.
 
   @override
   Widget build(BuildContext context) {

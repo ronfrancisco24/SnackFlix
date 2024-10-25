@@ -23,18 +23,27 @@ class _KeypadPageState extends State<KeypadPage> {
   String get userSelection => selections
       .join(''); // a getter to retrieve user selection as a single string.
 
+  // RegExp checks for inputs if it matches with snack options.
+  // also checks its format (letter, number)
+
   void _addSelection(String value) {
-    //TODO: has to check if the user inputted one character and one number only.
-
-    final RegExp regExp = RegExp(r'[A-C][1-6]$');
-
     if (selections.length < 2) {
       selections.add(value);
-      setState(() {});
+      if (userSelection.length == 2) { // Check if the selection is complete
+        // Validate against the RegExp
+        if (RegExp(r'^[A-C][1-6]$').hasMatch(userSelection)) {
+          setState(() {});
+        } else {
+          _showSnackBar('Invalid selection format. Please use Letter, Number.');
+        }
+      } else {
+        setState(() {});
+      }
     } else {
-      print('limit has been reached.');
+      _showSnackBar('Limit has been reached.');
     }
   }
+
 
   void _deleteSelection() {
     if (selections.isNotEmpty) {
@@ -50,6 +59,16 @@ class _KeypadPageState extends State<KeypadPage> {
         throw Exception('No matching snack found for selection: $userSelection');
       },
     );
+  }
+
+  void _showSnackBar(String message) {
+    final snackBar = SnackBar(
+      content: Text(message),
+      duration: Duration(seconds: 2),
+      behavior: SnackBarBehavior.floating,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -165,10 +184,10 @@ class _KeypadPageState extends State<KeypadPage> {
                             icon: Icons.input,
                             onPressed: () {
                               final SnackOption? selectedOption = getSelectedOption();
-                              //TODO: if input matches an item, add to selectedSnack list
+                              // if input matches an item, add to selectedSnack list
                               if (selectedOption != null){
                                 widget.addToOrder(selectedOption); // Use widget.addToOrder to call the function
-                                print('Snack added: ${selectedOption.productName}');
+                                _showSnackBar('Snack added: ${selectedOption.productName}');
                               } else {
                                 print('No matching snack found for selection.');
                               }
