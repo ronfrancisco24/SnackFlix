@@ -1,4 +1,4 @@
-import 'package:vending_machine/widgets/snack_option.dart';
+import 'package:vending_machine/controllers/snack_option.dart';
 
 class Options {
   final List<SnackOption> snackOptions = [

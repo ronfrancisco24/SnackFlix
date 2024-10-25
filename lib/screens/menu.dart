@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart'; // provider
 import 'package:vending_machine/widgets/constants.dart';
 import 'package:vending_machine/widgets/buttons.dart';
-import 'package:vending_machine/widgets/options.dart';
-import 'package:vending_machine/widgets/snack_provider.dart';
-import 'package:vending_machine/widgets/snack_option.dart';
+import 'package:vending_machine/controllers/options.dart';
+import 'package:vending_machine/controllers/snack_provider.dart';
+import 'package:vending_machine/controllers/snack_option.dart';
 import 'keypad.dart';
 import 'transaction.dart';
 

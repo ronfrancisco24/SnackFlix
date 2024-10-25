@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vending_machine/widgets/snack_provider.dart';
+import 'package:vending_machine/controllers/snack_provider.dart';
 import 'menu.dart'; // Adjust this import as per your file structure
 
 void main() => runApp(const MyApp());

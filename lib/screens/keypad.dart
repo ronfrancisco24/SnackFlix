@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vending_machine/widgets/buttons.dart';
 import 'package:vending_machine/widgets/constants.dart';
-import 'package:vending_machine/widgets/options.dart';
-import 'package:vending_machine/widgets/snack_option.dart';
+import 'package:vending_machine/controllers/options.dart';
+import 'package:vending_machine/controllers/snack_option.dart';
 import 'menu.dart';
 
 class KeypadPage extends StatefulWidget {
@@ -90,16 +90,19 @@ class _KeypadPageState extends State<KeypadPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            if (selections.isNotEmpty)
-                              Text(
-                                'Order: ${userSelection}',
-                                style: kWhitePoppins.copyWith(fontSize: 20),
-                              )
-                            else
-                              Text(
-                                'Make order. (Format: Letter, Number)',
-                                style: kGrayPoppins.copyWith(fontSize: 20),
+                            Flexible(  // Use Flexible instead of directly wrapping Text
+                              child: Text(
+                                selections.isNotEmpty
+                                    ? 'Order: ${userSelection}'
+                                    : 'Make order. (Format: Letter, Number)',
+                                style: selections.isNotEmpty
+                                    ? kWhitePoppins.copyWith(fontSize: 20)
+                                    : kGrayPoppins.copyWith(fontSize: 20),
+                                overflow: TextOverflow.ellipsis,  // Prevent overflow
+                                softWrap: true,  // Allow wrapping
+                                textAlign: TextAlign.center,  // Center align the text
                               ),
+                            ),
                           ],
                         ),
                       ),
