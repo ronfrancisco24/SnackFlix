@@ -50,7 +50,7 @@ class _MenuPageState extends State<MenuPage> {
                     height: 10,
                   ),
                   Expanded(
-                    flex: 8,
+                    flex: 9,
                     child: GridView.builder(
                       padding: EdgeInsets.all(12),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

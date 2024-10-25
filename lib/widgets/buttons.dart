@@ -19,10 +19,10 @@ class RedOvalButton extends StatelessWidget {
         child: Center(
           child: Text(
             text!,
-            style: kBlackPoppins,
+            style: kBlackPoppins.copyWith(fontSize: 20),
           ),
         ),
-        height: 70,
+        height: 40,
         width: 250,
         decoration: BoxDecoration(
             color: kLightRed, borderRadius: BorderRadius.circular(30)),
@@ -73,7 +73,7 @@ class RedSquareButton extends StatelessWidget {
         child: Center(
           child: Text(
             text!,
-            style: kBlackPoppins,
+            style: kBlackPoppins.copyWith(fontSize: 20),
           ),
         ),
         height: 100,
@@ -99,7 +99,7 @@ class BlueSquareButton extends StatelessWidget {
         child: Center(
           child: Text(
             text!,
-            style: kWhitePoppins,
+            style: kWhitePoppins.copyWith(fontSize: 18),
           ),
         ),
         height: 100,
@@ -128,7 +128,7 @@ class GraySquareButton extends StatelessWidget {
               ? Icon(icon, color: Colors.white, size: 30)  // Customize the icon color and size
               : Text(
             text!,
-            style: kWhitePoppins,
+            style: kWhitePoppins.copyWith(fontSize: 18),
           ),
         ),
         height: 100,
