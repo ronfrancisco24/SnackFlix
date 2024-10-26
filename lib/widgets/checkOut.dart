@@ -9,6 +9,11 @@ class CheckOut {
     final snackProvider = Provider.of<SnackProvider>(context, listen: false);
     final transactionProvider = Provider.of<TransactionProvider>(context, listen: false); // Set listen to false
 
+    if (snackProvider.selectedSnacks.isEmpty){
+      SnackBarHelper.showSnackBar(context, 'You have not selected any snacks.');
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
