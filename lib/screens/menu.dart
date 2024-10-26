@@ -7,8 +7,8 @@ import 'package:vending_machine/controllers/snack_provider.dart';
 import 'package:vending_machine/controllers/snack_option.dart';
 import 'keypad.dart';
 import 'transaction.dart';
-import 'package:vending_machine/controllers/BalanceManager.dart';
 import 'package:vending_machine/widgets/checkOut.dart';
+import 'package:vending_machine/controllers/transaction_provider.dart';
 
 
 
@@ -30,6 +30,7 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     final snackProvider = Provider.of<SnackProvider>(context);
+    final transactionProvider = Provider.of<TransactionProvider>(context);
     return Scaffold(
       body: Row(
         children: [
@@ -75,7 +76,7 @@ class _MenuPageState extends State<MenuPage> {
                       },
                     ),
                   ),
-                  Text('Balance P: ${BalanceManager().balance}',
+                  Text('Balance P: ${transactionProvider.balance}',
                       style: kWhitePoppins.copyWith(fontSize: 15)),
                   SizedBox(height: 10),
                   Expanded(

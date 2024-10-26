@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:vending_machine/controllers/BalanceManager.dart';
 import '../controllers/snack_provider.dart';
 import 'snack_bar.dart';
+import 'package:vending_machine/controllers/transaction_provider.dart';
 
-class CheckOut{
+class CheckOut {
   void checkOut(BuildContext context) {
     final snackProvider = Provider.of<SnackProvider>(context, listen: false);
+    final transactionProvider = Provider.of<TransactionProvider>(context, listen: false); // Set listen to false
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text("Checkout"),
         content: Text("Would you like to confirm checkout?"),
         actions: [
-          // 'Yes' button
           TextButton(
             onPressed: () {
-              if(BalanceManager().balance < snackProvider.totalPrice){
+              if (transactionProvider.balance < snackProvider.totalPrice) {
                 SnackBarHelper.showSnackBar(context, "You do not have enough balance inserted in the machine!");
-              } else{
-                BalanceManager().balance -= snackProvider.totalPrice;
+              } else {
+                transactionProvider.updateBalance(transactionProvider.balance - snackProvider.totalPrice);
                 snackProvider.resetOrder();
                 SnackBarHelper.showSnackBar(context, "Transaction completed!");
               }
@@ -27,9 +28,8 @@ class CheckOut{
             },
             child: Text("Yes"),
           ),
-          // 'Cancel' button
           TextButton(
-            onPressed: () => Navigator.of(context).pop(), // Closes the dialog
+            onPressed: () => Navigator.of(context).pop(),
             child: Text("Cancel"),
           ),
         ],
