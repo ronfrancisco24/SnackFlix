@@ -22,10 +22,8 @@ class MenuPage extends StatefulWidget {
 
 class _MenuPageState extends State<MenuPage> {
 
-  //TODO: have to incorporate DFA for transactions
-  //TODO: use provider package (already incorporated) for the balance/transaction.
-  //TODO: balance should be updated dependent on the transaction page.
-
+  // To see DFA logic, check transition_dfa.dart
+  // To see regular expression logic, check keypad.dart
 
   @override
   Widget build(BuildContext context) {

@@ -1,3 +1,4 @@
+// declares the type of state
 enum TransactionState { idle, addingMoney, exceededLimit, confirmedTransaction, refunded }
 
 class TransactionDFA {
