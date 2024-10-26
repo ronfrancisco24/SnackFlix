@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:vending_machine/controllers/snack_provider.dart';
 import 'package:vending_machine/controllers/transaction_provider.dart';
-import 'menu.dart';
+import 'home.dart';
 
 void main() => runApp(const MyApp());
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: MenuPage(),
+        home: HomePage(),
       ),
     );
   }
