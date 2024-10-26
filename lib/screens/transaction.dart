@@ -22,12 +22,13 @@ class _TransactionPageState extends State<TransactionPage> {
     void _handleAddToBalance(double amount) {
       transactionProvider.addToBalance(amount);
 
+      // if current state equals to exceeded limit, provide alert dialog.
       if (transactionProvider.currentState == TransactionState.exceededLimit) {
         showDialog(
           context: context,
           builder: (context) => AlertDialog(
             title: Text("Exceeds Limit"),
-            content: Text("Adding $amount will cause the balance to exceed 100 pesos"),
+            content: Text("You cannot have more than 100 pesos in the machine."),
             actions: [
               TextButton(
                 onPressed: () {
@@ -43,7 +44,7 @@ class _TransactionPageState extends State<TransactionPage> {
     }
 
     // handles confirming transaction
-
+    // once transaction is confirmed, return to menu page.
     void _handleConfirmTransaction() {
       transactionProvider.confirmTransaction();
       Navigator.push(context, MaterialPageRoute(builder: (context) => MenuPage()));
@@ -58,7 +59,7 @@ class _TransactionPageState extends State<TransactionPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Input Money', style: kWhitePoppins),
+        title: const Text('Amount', style: kWhitePoppins),
         backgroundColor: kBlack,
       ),
       body: Column(

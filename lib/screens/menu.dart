@@ -74,7 +74,7 @@ class _MenuPageState extends State<MenuPage> {
                       },
                     ),
                   ),
-                  Text('Balance P: ${transactionProvider.balance}',
+                  Text('Balance ₱${transactionProvider.balance}',
                       style: kWhitePoppins.copyWith(fontSize: 15)),
                   SizedBox(height: 10),
                   Expanded(
@@ -185,7 +185,7 @@ class _MenuPageState extends State<MenuPage> {
                   RichText(
                     text: TextSpan(
                       children: [TextSpan(text: 'Total:\n', style: kGrayPoppins.copyWith(fontSize: 15)),
-                        TextSpan(text: 'P: ${snackProvider.totalPrice.toStringAsFixed(2)}', style: kGrayPoppins.copyWith(fontSize: 15)), ],
+                        TextSpan(text: '₱${snackProvider.totalPrice.toStringAsFixed(2)}', style: kGrayPoppins.copyWith(fontSize: 15)), ],
                     ),
                   ),
                   Expanded(
