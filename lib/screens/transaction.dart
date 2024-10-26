@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:vending_machine/screens/menu.dart';
 import 'package:vending_machine/widgets/constants.dart';
+import 'package:vending_machine/controllers/BalanceManager.dart';
+import 'package:vending_machine/widgets/snack_bar.dart';
+
 
 class TransactionPage extends StatefulWidget {
   const TransactionPage({super.key});
@@ -10,16 +13,27 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-  double balance = 0;
 
-  //TODO: has to be globalized. use a provider.
-  //TODO: have the balance have a limit of 100 (check transaction page)
-  //TODO: have a reset button for the balance.
+  //TODO: has to be globalized. use a provider. (Already globalized balance.)
 
   void addToBalance(double amount){
-    setState(() {
-      balance += amount;
-    });
+      if (BalanceManager().balance + amount > 100){
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text("Exceeds Limit"),
+              content: Text("Adding $amount will cause the balance to exceed 100 pesos"),
+              actions: [
+                TextButton(
+                    onPressed: ()=> Navigator.of(context).pop(),
+                    child: Text('OK')),
+              ],
+            ));
+      } else{
+        setState(() {
+          BalanceManager().balance += amount;
+        });
+      }
   }
 
   @override
@@ -51,11 +65,13 @@ class _TransactionPageState extends State<TransactionPage> {
                               color: kBlueGray),
                           child: Column(
                             children: [
+                              // TODO: make a note saying that there can only be a maximum of 100
+                              // Text("Note: There can only be a maximum of 100 in the vending machine"),
                               SizedBox(height: 40),
                               Text('Total Balance',
                                   style: kWhitePoppins.copyWith(
                                       fontSize: 15, color: kDarkGray)),
-                              Text('₱ ${balance.toStringAsFixed(2)}',
+                              Text('₱ ${BalanceManager().balance.toStringAsFixed(2)}',
                                   style: kWhitePoppins.copyWith(fontSize: 50)),
                             ],
                           ),
@@ -116,7 +132,8 @@ class _TransactionPageState extends State<TransactionPage> {
                         TextButton(
                           onPressed: (){
                             setState(() {
-                              balance = 0;
+                              SnackBarHelper.showSnackBar(context, 'Successfully refunded ${BalanceManager().balance}!');
+                              BalanceManager().balance = 0;
                             });
                           },
                           style: TextButton.styleFrom(

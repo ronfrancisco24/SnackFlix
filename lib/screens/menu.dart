@@ -7,6 +7,10 @@ import 'package:vending_machine/controllers/snack_provider.dart';
 import 'package:vending_machine/controllers/snack_option.dart';
 import 'keypad.dart';
 import 'transaction.dart';
+import 'package:vending_machine/controllers/BalanceManager.dart';
+import 'package:vending_machine/widgets/checkOut.dart';
+
+
 
 class MenuPage extends StatefulWidget {
 
@@ -21,6 +25,7 @@ class _MenuPageState extends State<MenuPage> {
   //TODO: have to incorporate DFA for transactions
   //TODO: use provider package (already incorporated) for the balance/transaction.
   //TODO: balance should be updated dependent on the transaction page.
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +75,7 @@ class _MenuPageState extends State<MenuPage> {
                       },
                     ),
                   ),
-                  Text('Balance P: 0.00',
+                  Text('Balance P: ${BalanceManager().balance}',
                       style: kWhitePoppins.copyWith(fontSize: 15)),
                   SizedBox(height: 10),
                   Expanded(
@@ -190,12 +195,7 @@ class _MenuPageState extends State<MenuPage> {
                       child: RedSquareButton(
                         text: 'Done',
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const TransactionPage(),
-                            ),
-                          );
+                          CheckOut().checkOut(context);
                         },
                       ),
                     ),
