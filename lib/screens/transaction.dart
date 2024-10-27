@@ -14,7 +14,6 @@ class TransactionPage extends StatefulWidget {
 }
 
 class _TransactionPageState extends State<TransactionPage> {
-
   @override
   Widget build(BuildContext context) {
     final transactionProvider = Provider.of<TransactionProvider>(context);
@@ -28,7 +27,8 @@ class _TransactionPageState extends State<TransactionPage> {
           context: context,
           builder: (context) => AlertDialog(
             title: Text("Exceeds Limit"),
-            content: Text("You cannot have more than 100 pesos in the machine."),
+            content:
+                Text("You cannot have more than 100 pesos in the machine."),
             actions: [
               TextButton(
                 onPressed: () {
@@ -47,13 +47,16 @@ class _TransactionPageState extends State<TransactionPage> {
     // once transaction is confirmed, return to menu page.
     void _handleConfirmTransaction() {
       transactionProvider.confirmTransaction();
-      Navigator.push(context, MaterialPageRoute(builder: (context) => MenuPage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => MenuPage()));
     }
 
     // uses dfa to handle refund
     void _handleRefund() {
-      double refundedAmount = transactionProvider.refund(); // Capture the refunded amount
-      SnackBarHelper.showSnackBar(context, 'Successfully refunded ₱${refundedAmount.toStringAsFixed(2)}!'); // Use the captured amount
+      double refundedAmount =
+          transactionProvider.refund(); // Capture the refunded amount
+      SnackBarHelper.showSnackBar(context,
+          'Successfully refunded ₱${refundedAmount.toStringAsFixed(2)}!'); // Use the captured amount
     }
 
     return Scaffold(
@@ -81,7 +84,8 @@ class _TransactionPageState extends State<TransactionPage> {
                       children: [
                         SizedBox(height: 40),
                         Text('Total Balance',
-                            style: kWhitePoppins.copyWith(fontSize: 15, color: kDarkGray)),
+                            style: kWhitePoppins.copyWith(
+                                fontSize: 15, color: kDarkGray)),
                         Text(
                           '₱ ${transactionProvider.balance.toStringAsFixed(2)}',
                           style: kWhitePoppins.copyWith(fontSize: 50),
@@ -90,65 +94,80 @@ class _TransactionPageState extends State<TransactionPage> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () => _handleAddToBalance(1),
-                        child: Image.asset('images/piso.png', width: 130),
-                      ),
-                      GestureDetector(
-                        onTap: () => _handleAddToBalance(5),
-                        child: Image.asset('images/five_piso.png', width: 125),
-                      ),
-                      SizedBox(width: 10),
-                      GestureDetector(
-                        onTap: () => _handleAddToBalance(10),
-                        child: Image.asset('images/ten_piso.png', width: 135),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () => _handleAddToBalance(20),
-                        child: Image.asset('images/twenty.png', width: 130),
-                      ),
-                      GestureDetector(
-                        onTap: () => _handleAddToBalance(50),
-                        child: Image.asset('images/fifty.png', width: 140),
-                      ),
-                      GestureDetector(
-                        onTap: () => _handleAddToBalance(100),
-                        child: Image.asset('images/hundred.png', width: 139),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10),
-                  TextButton(
-                    onPressed: _handleRefund,
-                    style: TextButton.styleFrom(
-                      backgroundColor: kDarkGray,
-                      fixedSize: Size.fromWidth(350),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () => _handleAddToBalance(1),
+                          child: Image.asset('images/piso.png', width: 130),
+                        ),
+                        GestureDetector(
+                          onTap: () => _handleAddToBalance(5),
+                          child:
+                              Image.asset('images/five_piso.png', width: 125),
+                        ),
+                        SizedBox(width: 10),
+                        GestureDetector(
+                          onTap: () => _handleAddToBalance(10),
+                          child: Image.asset('images/ten_piso.png', width: 135),
+                        ),
+                      ],
                     ),
-                    child: Text(
-                      'Refund',
-                      style: kGrayPoppins.copyWith(fontSize: 26, fontWeight: FontWeight.bold),
+                  ),
+                  Expanded(
+                    flex: 3,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        GestureDetector(
+                          onTap: () => _handleAddToBalance(20),
+                          child: Image.asset('images/twenty.png', width: 130),
+                        ),
+                        GestureDetector(
+                          onTap: () => _handleAddToBalance(50),
+                          child: Image.asset('images/fifty.png', width: 140),
+                        ),
+                        GestureDetector(
+                          onTap: () => _handleAddToBalance(100),
+                          child: Image.asset('images/hundred.png', width: 139),
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(height: 10),
-                  TextButton(
-                    onPressed: _handleConfirmTransaction,
-                    style: TextButton.styleFrom(
-                      backgroundColor: kLightRed,
-                      fixedSize: Size.fromWidth(350),
-                    ),
-                    child: Text(
-                      'Confirm',
-                      style: kBlackPoppins.copyWith(fontSize: 26, fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: _handleRefund,
+                      style: TextButton.styleFrom(
+                        backgroundColor: kDarkGray,
+                        fixedSize: Size.fromWidth(350),
+                      ),
+                      child: Text(
+                        'Refund',
+                        style: kGrayPoppins.copyWith(
+                            fontSize: 26, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
+                  SizedBox(height: 10),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: _handleConfirmTransaction,
+                      style: TextButton.styleFrom(
+                        backgroundColor: kLightRed,
+                        fixedSize: Size.fromWidth(350),
+                      ),
+                      child: Text(
+                        'Confirm',
+                        style: kBlackPoppins.copyWith(
+                            fontSize: 26, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 40,
+                  )
                 ],
               ),
             ),
