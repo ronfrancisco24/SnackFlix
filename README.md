@@ -1,6 +1,5 @@
 # vending_machine
-
-A new Flutter project.
+Snackflix. A vending machine app that uses regular expressions and DFA's to handle snack orders and transactions. 
 
 ## Getting Started
 
