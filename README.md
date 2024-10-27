@@ -1,5 +1,5 @@
-# vending_machine
-Snackflix. A vending machine app that uses regular expressions and DFA's to handle snack orders and transactions. 
+# SnackFlix
+Snackflix is a vending machine app that uses regular expressions and DFA's to handle snack orders and transactions. 
 
 ## Getting Started
 
