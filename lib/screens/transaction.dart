@@ -6,6 +6,8 @@ import 'package:vending_machine/widgets/snack_bar.dart';
 import 'package:vending_machine/controllers/transition_dfa.dart';
 import 'package:vending_machine/controllers/transaction_provider.dart';
 
+import '../widgets/buttons.dart';
+
 class TransactionPage extends StatefulWidget {
   const TransactionPage({super.key});
 
@@ -55,8 +57,14 @@ class _TransactionPageState extends State<TransactionPage> {
     void _handleRefund() {
       double refundedAmount =
           transactionProvider.refund(); // Capture the refunded amount
-      SnackBarHelper.showSnackBar(context,
-          'Successfully refunded ₱${refundedAmount.toStringAsFixed(2)}!'); // Use the captured amount
+
+      if (refundedAmount == 0){
+        SnackBarHelper.showSnackBar(context,
+            'No balance to refund.'); // Use the captured amount
+      } else {
+        SnackBarHelper.showSnackBar(context,
+            'Successfully refunded ₱${refundedAmount.toStringAsFixed(2)}!'); // Use the captured amount
+      }
     }
 
     return Scaffold(
@@ -137,31 +145,23 @@ class _TransactionPageState extends State<TransactionPage> {
                   ),
                   SizedBox(height: 10),
                   Expanded(
-                    child: TextButton(
-                      onPressed: _handleRefund,
-                      style: TextButton.styleFrom(
-                        backgroundColor: kDarkGray,
-                        fixedSize: Size.fromWidth(350),
-                      ),
-                      child: Text(
-                        'Refund',
-                        style: kGrayPoppins.copyWith(
-                            fontSize: 26, fontWeight: FontWeight.bold),
+                    child: SizedBox(
+                      width: 380,
+                      child: DarkGrayOvalButton(
+                        onPressed: _handleRefund,
+                        text:
+                          'Refund',
                       ),
                     ),
                   ),
                   SizedBox(height: 10),
                   Expanded(
-                    child: TextButton(
-                      onPressed: _handleConfirmTransaction,
-                      style: TextButton.styleFrom(
-                        backgroundColor: kLightRed,
-                        fixedSize: Size.fromWidth(350),
-                      ),
-                      child: Text(
-                        'Confirm',
-                        style: kBlackPoppins.copyWith(
-                            fontSize: 26, fontWeight: FontWeight.bold),
+                    child: SizedBox(
+                      width: 380,
+                      child: RedOvalButton(
+                        onPressed: _handleConfirmTransaction,
+                        text:
+                          'Confirm',
                       ),
                     ),
                   ),

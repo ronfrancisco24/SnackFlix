@@ -31,6 +31,32 @@ class RedOvalButton extends StatelessWidget {
   }
 }
 
+class DarkGrayOvalButton extends StatelessWidget {
+  final String? text;
+  final void Function()? onPressed;
+
+  const DarkGrayOvalButton({this.text, this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onPressed,
+      child: Container(
+        child: Center(
+          child: Text(
+            text!,
+            style: kGrayPoppins.copyWith(fontSize: 20),
+          ),
+        ),
+        height: 40,
+        width: 250,
+        decoration: BoxDecoration(
+            color: kDarkGray, borderRadius: BorderRadius.circular(30)),
+      ),
+    );
+  }
+}
+
 class BlackOvalButton extends StatelessWidget {
   final String? text;
   final void Function()? onPressed;
